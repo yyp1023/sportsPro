@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Registration>
+@{ ViewBag.Title = "Registrations"; 
+    }
+<br />
+<div class="container pb-10">
+    <div class="col col-12 col-md-8">
+        <h2 class="text-dark">Customer: @ViewBag.Customer.Firstname @ViewBag.Customer.Lastname</h2>
+        <h4>Registrations</h4>
+        <br />
+        <div class="input-group mb-3">
+            <table class="table col-6 align-center">
+                <thead>
+                    <tr>
+                        <th scope="col">Product</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <h4>@TempData["message"]</h4>
+                    @foreach (Registration registration in Model)
+                    {
+                <tr>
+                    <td>@registration.Product.Name</td>
+                            <td class="align-content-center">
+                <a class="btn btn-danger" asp-controller="Registration" asp-action="Delete" asp-route-id="RegistraionId">Delete</a>
+            </td>       
+                </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <h4>Products: </h4>
+        <form asp-controller="Registration" asp-action="Registrations" method="post">
+            <div class="col-md-12">
+                <div class="input-group mb-6">
+                    <label class="input-group-text">Choose Product:</label>
+                    <select id="ProductId" name="ProductId" class="form-select" asp-items="ViewBag.ProudctId">
+                        <option selected>--  Select Product  --</option>
+                    </select>
+                </div>
+                <br />
+            </div>  
+        </form>
+    </div>
+</div>

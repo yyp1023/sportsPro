@@ -1,0 +1,18 @@
+﻿@model Customer
+@{ ViewBag.Title = "Registrations"; }
+
+<form asp-controller="Registration" asp-action="Registrations" method="get">
+    <div class="col-md-4">
+        <div class="input-group mb-6">
+            <h2>Get Customer</h2>
+            <select class="form-select" id="id" name="id" asp-items="@(new SelectList(ViewBag.listOfCust, "CustomerId", "Slug"))">
+                <option selected disabled>--  Select Customer  --</option>
+            </select>
+            <div class="text-danger">@TempData["message"]</div>
+        </div>
+    </div>
+    <br />
+    <div class="col-md-7">
+        <button class="btn btn-primary" type="submit">@ViewBag.Action</button>
+    </div>
+</form>

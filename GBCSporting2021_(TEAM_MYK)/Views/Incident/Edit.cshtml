@@ -1,0 +1,69 @@
+﻿@model Incident
+@{
+    ViewBag.Title = "Add/Edit Page of Incident";
+}
+<div class="container pb-10">
+    <div class="row align-center justify-content-center text-center py-5">
+        <div class="col col-12 col-md-8">
+            <h2 class="text-dark">@ViewBag.Title</h2>
+            <p class="lead font-weight-lighter text-muted">Update all the data until it lasts.</p>
+        </div>
+    </div>
+    <form asp-controller="Incident" asp-action="Edit" method="post">
+        <div class="col-md-4">
+            <div class="input-group mb-6">
+                <label class="input-group-text">Customer:</label>
+                <select asp-for="CustomerId" id="CustomerId" name="CustomerId" class="form-select" asp-items="ViewBag.CustomerId">
+                    <option selected disabled>--  Select Customer  --</option>   
+                </select>
+            </div>
+        </div>
+        <br />
+        <div class="col-md-4">
+            <div class="input-group mb-6">
+                <label class="input-group-text">Product:   </label>
+                <select asp-for="ProductId" id="ProductId" name="ProductId" class="form-select" asp-items="ViewBag.ProductId">
+                    <p><span class="text-danger" asp-validation-for="ProductId"></span></p>
+                    <option selected disabled>--  Select Product  --</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <label asp-for="Title" class="form-label">Title</label>
+            <input asp-for="Title" class="form-control">
+            <p><span class="text-danger" asp-validation-for="Title"></span></p>
+        </div>
+        <br />
+        <div class="col-md-4">
+            <div class="input-group">
+                <span class="input-group-text">Description:</span>
+                <textarea asp-for="Description" class="form-control" aria-label="With textarea"></textarea>
+                <p><span class="text-danger" asp-validation-for="Description"></span></p>
+            </div>
+        </div>
+        <br />
+        <div class="col-md-4">
+            <div class="input-group mb-6">
+                <label class="input-group-text">Technician:</label>
+                <select asp-for="TechnicianId" id="TechnicianId" name="TechnicianId" class="form-select" asp-items="ViewBag.TechnicianId">
+                    <option selected disabled>--  Select Technician  --</option>
+                </select>
+                <p><span class="text-danger" asp-validation-for="TechnicianId"></span></p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <label asp-for="DateOpened" class="form-label">Date Opened</label>
+            <input asp-for="DateOpened" class="form-control" type="date" value="@(ViewBag.Action == "Edit" ? @String.Format("{0:yyyy-MM-dd}", Model.DateOpened) : @String.Format("{0:yyyy-MM-dd}", DateTime.Now))">
+        </div>
+        <div class="col-md-4">
+            <label asp-for="DateClosed" class="form-label">Date Closed</label>
+            <input asp-for="DateClosed" class="form-control" type="date" value="@(ViewBag.Action == "Edit" ? @String.Format("{0:yyyy-MM-dd}", Model.DateOpened) : @String.Format("{0:yyyy-MM-dd}", DateTime.Now))">
+        </div>
+        <input type="hidden" asp-for="IncidentId" />
+        <br />
+        <div class="col-md-7">
+            <button class="btn btn-primary" type="submit">@ViewBag.Action</button>
+            <a asp-controller="Incident" asp-action="List" class="btn btn-primary">No</a>
+        </div>
+    </form>
+</div>
